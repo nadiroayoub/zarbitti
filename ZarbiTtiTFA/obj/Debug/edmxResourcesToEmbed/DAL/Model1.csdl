@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="zarbittiDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="carrito">
+    <Key>
+      <PropertyRef Name="IDCarrito" />
+    </Key>
+    <Property Name="IDCarrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDProducto" Type="Int32" />
+    <Property Name="IDMiembro" Type="Int32" />
+    <Property Name="IDestadoCarrito" Type="Int32" />
+    <NavigationProperty Name="producto" Relationship="zarbittiDBModel.FK__carrito__IDProdu__38996AB5" FromRole="carrito" ToRole="producto" />
+  </EntityType>
+  <EntityType Name="categoria">
+    <Key>
+      <PropertyRef Name="IDCategoria" />
+    </Key>
+    <Property Name="IDCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreCategoria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Boolean" />
+    <Property Name="eliminado" Type="Boolean" />
+    <NavigationProperty Name="producto" Relationship="zarbittiDBModel.FK__producto__IDCate__398D8EEE" FromRole="categoria" ToRole="producto" />
+  </EntityType>
+  <EntityType Name="detallesCompra">
+    <Key>
+      <PropertyRef Name="IDDetallesCompra" />
+    </Key>
+    <Property Name="IDDetallesCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDMiembro" Type="Int32" />
+    <Property Name="direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="ciudad" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="provincia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="codigozip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IDOrder" Type="Int32" />
+    <Property Name="precioPagado" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="formaPago" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="miembro" Relationship="Self.FK__detallesC__IDMie__3A81B327" FromRole="detallesCompra" ToRole="miembro" />
+  </EntityType>
+  <EntityType Name="estadoCarrito">
+    <Key>
+      <PropertyRef Name="IDestadoCarrito" />
+    </Key>
+    <Property Name="IDestadoCarrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="estadoCarrito1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="imagenSlide">
+    <Key>
+      <PropertyRef Name="IDslideImagenn" />
+    </Key>
+    <Property Name="IDslideImagenn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="slideTitulo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="slideImagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="miembro">
+    <Key>
+      <PropertyRef Name="IDMiembro" />
+    </Key>
+    <Property Name="IDMiembro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="correoId" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="contrasena" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="active" Type="Boolean" />
+    <Property Name="eliminado" Type="Boolean" />
+    <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="fechaModificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="detallesCompra" Relationship="Self.FK__detallesC__IDMie__3A81B327" FromRole="miembro" ToRole="detallesCompra" />
+  </EntityType>
+  <EntityType Name="rol">
+    <Key>
+      <PropertyRef Name="IDRol" />
+    </Key>
+    <Property Name="IDRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreRol" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="rolMiembro">
+    <Key>
+      <PropertyRef Name="IDRolMiembro" />
+    </Key>
+    <Property Name="IDRolMiembro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDMiembro" Type="Int32" />
+    <Property Name="IDRol" Type="Int32" />
+  </EntityType>
+  <Association Name="FK__detallesC__IDMie__3A81B327">
+    <End Role="miembro" Type="Self.miembro" Multiplicity="0..1" />
+    <End Role="detallesCompra" Type="Self.detallesCompra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="miembro">
+        <PropertyRef Name="IDMiembro" />
+      </Principal>
+      <Dependent Role="detallesCompra">
+        <PropertyRef Name="IDMiembro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="zarbittiDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="carrito" EntityType="Self.carrito" />
+    <EntitySet Name="categoria" EntityType="Self.categoria" />
+    <EntitySet Name="detallesCompra" EntityType="Self.detallesCompra" />
+    <EntitySet Name="estadoCarrito" EntityType="Self.estadoCarrito" />
+    <EntitySet Name="imagenSlide" EntityType="Self.imagenSlide" />
+    <EntitySet Name="miembro" EntityType="Self.miembro" />
+    <EntitySet Name="rol" EntityType="Self.rol" />
+    <EntitySet Name="rolMiembro" EntityType="Self.rolMiembro" />
+    <AssociationSet Name="FK__detallesC__IDMie__3A81B327" Association="Self.FK__detallesC__IDMie__3A81B327">
+      <End Role="miembro" EntitySet="miembro" />
+      <End Role="detallesCompra" EntitySet="detallesCompra" />
+    </AssociationSet>
+    <EntitySet Name="producto" EntityType="zarbittiDBModel.producto" />
+    <AssociationSet Name="FK__carrito__IDProdu__38996AB5" Association="zarbittiDBModel.FK__carrito__IDProdu__38996AB5">
+      <End Role="producto" EntitySet="producto" />
+      <End Role="carrito" EntitySet="carrito" />
+    </AssociationSet>
+    <AssociationSet Name="FK__producto__IDCate__398D8EEE" Association="zarbittiDBModel.FK__producto__IDCate__398D8EEE">
+      <End Role="categoria" EntitySet="categoria" />
+      <End Role="producto" EntitySet="producto" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="producto">
+    <Key>
+      <PropertyRef Name="IDProducto" />
+    </Key>
+    <Property Name="IDProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombreProducto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="IDCategoria" Type="Int32" />
+    <Property Name="active" Type="Boolean" />
+    <Property Name="eliminado" Type="Boolean" />
+    <Property Name="fechaDeCreacion" Type="DateTime" Precision="3" />
+    <Property Name="fechaDeModificacion" Type="DateTime" Precision="3" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsFeatured" Type="Boolean" />
+    <Property Name="cantidad" Type="Int32" />
+    <Property Name="precio" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="carrito" Relationship="zarbittiDBModel.FK__carrito__IDProdu__38996AB5" FromRole="producto" ToRole="carrito" />
+    <NavigationProperty Name="categoria" Relationship="zarbittiDBModel.FK__producto__IDCate__398D8EEE" FromRole="producto" ToRole="categoria" />
+  </EntityType>
+  <Association Name="FK__carrito__IDProdu__38996AB5">
+    <End Type="zarbittiDBModel.producto" Role="producto" Multiplicity="0..1" />
+    <End Type="zarbittiDBModel.carrito" Role="carrito" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="producto">
+        <PropertyRef Name="IDProducto" />
+      </Principal>
+      <Dependent Role="carrito">
+        <PropertyRef Name="IDProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__producto__IDCate__398D8EEE">
+    <End Type="zarbittiDBModel.categoria" Role="categoria" Multiplicity="0..1" />
+    <End Type="zarbittiDBModel.producto" Role="producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categoria">
+        <PropertyRef Name="IDCategoria" />
+      </Principal>
+      <Dependent Role="producto">
+        <PropertyRef Name="IDCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

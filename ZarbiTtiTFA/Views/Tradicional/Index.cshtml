@@ -1,0 +1,54 @@
+﻿@model ZarbiTtiTFA.Models.Tradicional.TradicionalIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row product-container">
+    @foreach (var item in Model.listaDeProductos) 
+    {
+        if (item.IDCategoria == 1)
+        {
+
+       
+        <div class="col-md-3 col-sm-3 col-xs-6" style="margin-bottom:8px">
+            <div class="thumbnail product-item" style="height:300px">
+
+                <img class="img-responsive" title="Click to View Product detail"
+                     style="cursor:pointer;height:160px;width:100%"
+                     src="~/ProductImg/@item.ProductImage" />
+
+                <div class="caption">
+                    <h5>@item.nombreProducto</h5>
+                    <p>@item.precio €.</p>
+                    <p>
+                        @if (item.cantidad > 0)
+                        {
+                            using (Html.BeginForm("AnyadirCarro", "Tradicional", new { idProducto = item.IDProducto },  FormMethod.Post))
+                            {
+                                <button type="submit" class="pull-right"><i class="fas fa-shopping-cart"></i></button>
+                            }
+                            <p>Disponible</p>
+                        }
+                        else
+                        {
+                            <p>No es disponible</p>
+                        }
+                        </p>
+                        <div class="product-item-badge">
+                            @if (item.IsFeatured == true)
+                            {
+                                <p>Nueva</p>
+
+                            }
+                            else
+                            {
+                                <p>Segunda mano</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

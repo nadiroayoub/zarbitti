@@ -1,0 +1,44 @@
+﻿@model ZarbiTtiTFA.Models.DetallesCategoria
+@{
+    ViewBag.Title = "UpdateCategoria";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item ">Categorias</li>
+        <li class="breadcrumb-item active">Añadir nueva categoria</li>
+
+
+    </ol>
+    <!-- DataTables Example -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Añadir nueva categoria
+
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("UpdateCategoria", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(m => m.IDCategoria)
+
+                <div class="form-group">
+                    <label class="control-label">Nombre de la categoria</label>
+
+                    @Html.TextBoxFor(m => m.nombreCategoria, new { @class = "form-control", placeholder = "Ingrese el nombre de la categoría", required = "required", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.nombreCategoria, "", new { @class = "text-danger" })
+                </div>
+
+                <a onclick="window.history.back();" class="btn btn-danger" style="color:white">Canelar</a>
+                <input type="submit" class="btn btn-primary" value="guardar" />
+            }
+        </div>
+    </div>
+</div>

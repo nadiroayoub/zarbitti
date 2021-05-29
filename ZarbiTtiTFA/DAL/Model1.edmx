@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="zarbittiDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="carrito">
+          <Key>
+            <PropertyRef Name="IDCarrito" />
+          </Key>
+          <Property Name="IDCarrito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDProducto" Type="int" />
+          <Property Name="IDMiembro" Type="int" />
+          <Property Name="IDestadoCarrito" Type="int" />
+        </EntityType>
+        <EntityType Name="categoria">
+          <Key>
+            <PropertyRef Name="IDCategoria" />
+          </Key>
+          <Property Name="IDCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreCategoria" Type="varchar" MaxLength="500" />
+          <Property Name="active" Type="bit" />
+          <Property Name="eliminado" Type="bit" />
+        </EntityType>
+        <EntityType Name="detallesCompra">
+          <Key>
+            <PropertyRef Name="IDDetallesCompra" />
+          </Key>
+          <Property Name="IDDetallesCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDMiembro" Type="int" />
+          <Property Name="direccion" Type="varchar" MaxLength="500" />
+          <Property Name="ciudad" Type="varchar" MaxLength="500" />
+          <Property Name="provincia" Type="varchar" MaxLength="500" />
+          <Property Name="pais" Type="varchar" MaxLength="50" />
+          <Property Name="codigozip" Type="varchar" MaxLength="50" />
+          <Property Name="IDOrder" Type="int" />
+          <Property Name="precioPagado" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="formaPago" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="estadoCarrito">
+          <Key>
+            <PropertyRef Name="IDestadoCarrito" />
+          </Key>
+          <Property Name="IDestadoCarrito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estadoCarrito" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="imagenSlide">
+          <Key>
+            <PropertyRef Name="IDslideImagenn" />
+          </Key>
+          <Property Name="IDslideImagenn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="slideTitulo" Type="varchar" MaxLength="500" />
+          <Property Name="slideImagen" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="miembro">
+          <Key>
+            <PropertyRef Name="IDMiembro" />
+          </Key>
+          <Property Name="IDMiembro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="200" />
+          <Property Name="apellido" Type="varchar" MaxLength="200" />
+          <Property Name="correoId" Type="varchar" MaxLength="200" />
+          <Property Name="contrasena" Type="varchar" MaxLength="500" />
+          <Property Name="active" Type="bit" />
+          <Property Name="eliminado" Type="bit" />
+          <Property Name="fechaCreacion" Type="datetime" />
+          <Property Name="fechaModificacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="producto">
+          <Key>
+            <PropertyRef Name="IDProducto" />
+          </Key>
+          <Property Name="IDProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreProducto" Type="varchar" MaxLength="500" />
+          <Property Name="IDCategoria" Type="int" />
+          <Property Name="active" Type="bit" />
+          <Property Name="eliminado" Type="bit" />
+          <Property Name="fechaDeCreacion" Type="datetime" />
+          <Property Name="fechaDeModificacion" Type="datetime" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductImage" Type="varchar(max)" />
+          <Property Name="IsFeatured" Type="bit" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="precio" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="IDRol" />
+          </Key>
+          <Property Name="IDRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreRol" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="rolMiembro">
+          <Key>
+            <PropertyRef Name="IDRolMiembro" />
+          </Key>
+          <Property Name="IDRolMiembro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDMiembro" Type="int" />
+          <Property Name="IDRol" Type="int" />
+        </EntityType>
+        <Association Name="FK__carrito__IDProdu__38996AB5">
+          <End Role="producto" Type="Self.producto" Multiplicity="0..1" />
+          <End Role="carrito" Type="Self.carrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producto">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="carrito">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__detallesC__IDMie__3A81B327">
+          <End Role="miembro" Type="Self.miembro" Multiplicity="0..1" />
+          <End Role="detallesCompra" Type="Self.detallesCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="miembro">
+              <PropertyRef Name="IDMiembro" />
+            </Principal>
+            <Dependent Role="detallesCompra">
+              <PropertyRef Name="IDMiembro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__producto__IDCate__398D8EEE">
+          <End Role="categoria" Type="Self.categoria" Multiplicity="0..1" />
+          <End Role="producto" Type="Self.producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="IDCategoria" />
+            </Principal>
+            <Dependent Role="producto">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="zarbittiDBModelStoreContainer">
+          <EntitySet Name="carrito" EntityType="Self.carrito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="categoria" EntityType="Self.categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="detallesCompra" EntityType="Self.detallesCompra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="estadoCarrito" EntityType="Self.estadoCarrito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="imagenSlide" EntityType="Self.imagenSlide" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="miembro" EntityType="Self.miembro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="producto" EntityType="Self.producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rolMiembro" EntityType="Self.rolMiembro" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__carrito__IDProdu__38996AB5" Association="Self.FK__carrito__IDProdu__38996AB5">
+            <End Role="producto" EntitySet="producto" />
+            <End Role="carrito" EntitySet="carrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__detallesC__IDMie__3A81B327" Association="Self.FK__detallesC__IDMie__3A81B327">
+            <End Role="miembro" EntitySet="miembro" />
+            <End Role="detallesCompra" EntitySet="detallesCompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK__producto__IDCate__398D8EEE" Association="Self.FK__producto__IDCate__398D8EEE">
+            <End Role="categoria" EntitySet="categoria" />
+            <End Role="producto" EntitySet="producto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="zarbittiDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="carrito">
+          <Key>
+            <PropertyRef Name="IDCarrito" />
+          </Key>
+          <Property Name="IDCarrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDProducto" Type="Int32" />
+          <Property Name="IDMiembro" Type="Int32" />
+          <Property Name="IDestadoCarrito" Type="Int32" />
+          <NavigationProperty Name="producto" Relationship="zarbittiDBModel.FK__carrito__IDProdu__38996AB5" FromRole="carrito" ToRole="producto" />
+        </EntityType>
+        <EntityType Name="categoria">
+          <Key>
+            <PropertyRef Name="IDCategoria" />
+          </Key>
+          <Property Name="IDCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreCategoria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="eliminado" Type="Boolean" />
+          <NavigationProperty Name="producto" Relationship="zarbittiDBModel.FK__producto__IDCate__398D8EEE" FromRole="categoria" ToRole="producto" />
+        </EntityType>
+        <EntityType Name="detallesCompra">
+          <Key>
+            <PropertyRef Name="IDDetallesCompra" />
+          </Key>
+          <Property Name="IDDetallesCompra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDMiembro" Type="Int32" />
+          <Property Name="direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ciudad" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="provincia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigozip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDOrder" Type="Int32" />
+          <Property Name="precioPagado" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="formaPago" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="miembro" Relationship="Self.FK__detallesC__IDMie__3A81B327" FromRole="detallesCompra" ToRole="miembro" />
+        </EntityType>
+        <EntityType Name="estadoCarrito">
+          <Key>
+            <PropertyRef Name="IDestadoCarrito" />
+          </Key>
+          <Property Name="IDestadoCarrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estadoCarrito1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="imagenSlide">
+          <Key>
+            <PropertyRef Name="IDslideImagenn" />
+          </Key>
+          <Property Name="IDslideImagenn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="slideTitulo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="slideImagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="miembro">
+          <Key>
+            <PropertyRef Name="IDMiembro" />
+          </Key>
+          <Property Name="IDMiembro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="correoId" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="contrasena" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="eliminado" Type="Boolean" />
+          <Property Name="fechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="fechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="detallesCompra" Relationship="Self.FK__detallesC__IDMie__3A81B327" FromRole="miembro" ToRole="detallesCompra" />
+        </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="IDRol" />
+          </Key>
+          <Property Name="IDRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreRol" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="rolMiembro">
+          <Key>
+            <PropertyRef Name="IDRolMiembro" />
+          </Key>
+          <Property Name="IDRolMiembro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDMiembro" Type="Int32" />
+          <Property Name="IDRol" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__detallesC__IDMie__3A81B327">
+          <End Role="miembro" Type="Self.miembro" Multiplicity="0..1" />
+          <End Role="detallesCompra" Type="Self.detallesCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="miembro">
+              <PropertyRef Name="IDMiembro" />
+            </Principal>
+            <Dependent Role="detallesCompra">
+              <PropertyRef Name="IDMiembro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="zarbittiDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="carrito" EntityType="Self.carrito" />
+          <EntitySet Name="categoria" EntityType="Self.categoria" />
+          <EntitySet Name="detallesCompra" EntityType="Self.detallesCompra" />
+          <EntitySet Name="estadoCarrito" EntityType="Self.estadoCarrito" />
+          <EntitySet Name="imagenSlide" EntityType="Self.imagenSlide" />
+          <EntitySet Name="miembro" EntityType="Self.miembro" />
+          <EntitySet Name="rol" EntityType="Self.rol" />
+          <EntitySet Name="rolMiembro" EntityType="Self.rolMiembro" />
+          <AssociationSet Name="FK__detallesC__IDMie__3A81B327" Association="Self.FK__detallesC__IDMie__3A81B327">
+            <End Role="miembro" EntitySet="miembro" />
+            <End Role="detallesCompra" EntitySet="detallesCompra" />
+          </AssociationSet>
+          <EntitySet Name="producto" EntityType="zarbittiDBModel.producto" />
+          <AssociationSet Name="FK__carrito__IDProdu__38996AB5" Association="zarbittiDBModel.FK__carrito__IDProdu__38996AB5">
+            <End Role="producto" EntitySet="producto" />
+            <End Role="carrito" EntitySet="carrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__producto__IDCate__398D8EEE" Association="zarbittiDBModel.FK__producto__IDCate__398D8EEE">
+            <End Role="categoria" EntitySet="categoria" />
+            <End Role="producto" EntitySet="producto" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="producto">
+          <Key>
+            <PropertyRef Name="IDProducto" />
+          </Key>
+          <Property Name="IDProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreProducto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IDCategoria" Type="Int32" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="eliminado" Type="Boolean" />
+          <Property Name="fechaDeCreacion" Type="DateTime" Precision="3" />
+          <Property Name="fechaDeModificacion" Type="DateTime" Precision="3" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsFeatured" Type="Boolean" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="precio" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="carrito" Relationship="zarbittiDBModel.FK__carrito__IDProdu__38996AB5" FromRole="producto" ToRole="carrito" />
+          <NavigationProperty Name="categoria" Relationship="zarbittiDBModel.FK__producto__IDCate__398D8EEE" FromRole="producto" ToRole="categoria" />
+        </EntityType>
+        <Association Name="FK__carrito__IDProdu__38996AB5">
+          <End Type="zarbittiDBModel.producto" Role="producto" Multiplicity="0..1" />
+          <End Type="zarbittiDBModel.carrito" Role="carrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producto">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="carrito">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__producto__IDCate__398D8EEE">
+          <End Type="zarbittiDBModel.categoria" Role="categoria" Multiplicity="0..1" />
+          <End Type="zarbittiDBModel.producto" Role="producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="IDCategoria" />
+            </Principal>
+            <Dependent Role="producto">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="zarbittiDBModelStoreContainer" CdmEntityContainer="zarbittiDBEntities">
+          <EntitySetMapping Name="carrito">
+            <EntityTypeMapping TypeName="zarbittiDBModel.carrito">
+              <MappingFragment StoreEntitySet="carrito">
+                <ScalarProperty Name="IDCarrito" ColumnName="IDCarrito" />
+                <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+                <ScalarProperty Name="IDMiembro" ColumnName="IDMiembro" />
+                <ScalarProperty Name="IDestadoCarrito" ColumnName="IDestadoCarrito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categoria">
+            <EntityTypeMapping TypeName="zarbittiDBModel.categoria">
+              <MappingFragment StoreEntitySet="categoria">
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="nombreCategoria" ColumnName="nombreCategoria" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detallesCompra">
+            <EntityTypeMapping TypeName="zarbittiDBModel.detallesCompra">
+              <MappingFragment StoreEntitySet="detallesCompra">
+                <ScalarProperty Name="IDDetallesCompra" ColumnName="IDDetallesCompra" />
+                <ScalarProperty Name="IDMiembro" ColumnName="IDMiembro" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="codigozip" ColumnName="codigozip" />
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="precioPagado" ColumnName="precioPagado" />
+                <ScalarProperty Name="formaPago" ColumnName="formaPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="estadoCarrito">
+            <EntityTypeMapping TypeName="zarbittiDBModel.estadoCarrito">
+              <MappingFragment StoreEntitySet="estadoCarrito">
+                <ScalarProperty Name="IDestadoCarrito" ColumnName="IDestadoCarrito" />
+                <ScalarProperty Name="estadoCarrito1" ColumnName="estadoCarrito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="imagenSlide">
+            <EntityTypeMapping TypeName="zarbittiDBModel.imagenSlide">
+              <MappingFragment StoreEntitySet="imagenSlide">
+                <ScalarProperty Name="IDslideImagenn" ColumnName="IDslideImagenn" />
+                <ScalarProperty Name="slideTitulo" ColumnName="slideTitulo" />
+                <ScalarProperty Name="slideImagen" ColumnName="slideImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="miembro">
+            <EntityTypeMapping TypeName="zarbittiDBModel.miembro">
+              <MappingFragment StoreEntitySet="miembro">
+                <ScalarProperty Name="IDMiembro" ColumnName="IDMiembro" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="correoId" ColumnName="correoId" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="fechaModificacion" ColumnName="fechaModificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rol">
+            <EntityTypeMapping TypeName="zarbittiDBModel.rol">
+              <MappingFragment StoreEntitySet="rol">
+                <ScalarProperty Name="IDRol" ColumnName="IDRol" />
+                <ScalarProperty Name="nombreRol" ColumnName="nombreRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rolMiembro">
+            <EntityTypeMapping TypeName="zarbittiDBModel.rolMiembro">
+              <MappingFragment StoreEntitySet="rolMiembro">
+                <ScalarProperty Name="IDRolMiembro" ColumnName="IDRolMiembro" />
+                <ScalarProperty Name="IDMiembro" ColumnName="IDMiembro" />
+                <ScalarProperty Name="IDRol" ColumnName="IDRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="producto">
+            <EntityTypeMapping TypeName="zarbittiDBModel.producto">
+              <MappingFragment StoreEntitySet="producto">
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="fechaDeModificacion" ColumnName="fechaDeModificacion" />
+                <ScalarProperty Name="fechaDeCreacion" ColumnName="fechaDeCreacion" />
+                <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="nombreProducto" ColumnName="nombreProducto" />
+                <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

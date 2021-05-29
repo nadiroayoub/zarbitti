@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ZarbiTtiTFA.DAL.producto>
+
+@{
+    ViewBag.Title = "Producto";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Product
+        <a href="~/Admin/AnyadirProducto" class="btn btn-info pull-right fa fa-plus">Añadir nuevo</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Nombre del producto</th>
+                        <th>Accion</th>
+
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>nombre del Producto</th>
+                        <th>Accion</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        int count = 1;
+                        <tr>
+                            <td>@count</td>
+                            <td>@item.nombreProducto</td>
+                            <td>
+
+                                @Html.ActionLink("Editar", "EditarProducto", new { productoId = item.IDProducto })
+                            </td>
+
+                        </tr>
+                        count++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="zarbittiDBModelStoreContainer" CdmEntityContainer="zarbittiDBEntities">
+    <EntitySetMapping Name="carrito">
+      <EntityTypeMapping TypeName="zarbittiDBModel.carrito">
+        <MappingFragment StoreEntitySet="carrito">
+          <ScalarProperty Name="IDCarrito" ColumnName="IDCarrito" />
+          <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+          <ScalarProperty Name="IDMiembro" ColumnName="IDMiembro" />
+          <ScalarProperty Name="IDestadoCarrito" ColumnName="IDestadoCarrito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="categoria">
+      <EntityTypeMapping TypeName="zarbittiDBModel.categoria">
+        <MappingFragment StoreEntitySet="categoria">
+          <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+          <ScalarProperty Name="nombreCategoria" ColumnName="nombreCategoria" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="detallesCompra">
+      <EntityTypeMapping TypeName="zarbittiDBModel.detallesCompra">
+        <MappingFragment StoreEntitySet="detallesCompra">
+          <ScalarProperty Name="IDDetallesCompra" ColumnName="IDDetallesCompra" />
+          <ScalarProperty Name="IDMiembro" ColumnName="IDMiembro" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+          <ScalarProperty Name="provincia" ColumnName="provincia" />
+          <ScalarProperty Name="pais" ColumnName="pais" />
+          <ScalarProperty Name="codigozip" ColumnName="codigozip" />
+          <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+          <ScalarProperty Name="precioPagado" ColumnName="precioPagado" />
+          <ScalarProperty Name="formaPago" ColumnName="formaPago" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="estadoCarrito">
+      <EntityTypeMapping TypeName="zarbittiDBModel.estadoCarrito">
+        <MappingFragment StoreEntitySet="estadoCarrito">
+          <ScalarProperty Name="IDestadoCarrito" ColumnName="IDestadoCarrito" />
+          <ScalarProperty Name="estadoCarrito1" ColumnName="estadoCarrito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="imagenSlide">
+      <EntityTypeMapping TypeName="zarbittiDBModel.imagenSlide">
+        <MappingFragment StoreEntitySet="imagenSlide">
+          <ScalarProperty Name="IDslideImagenn" ColumnName="IDslideImagenn" />
+          <ScalarProperty Name="slideTitulo" ColumnName="slideTitulo" />
+          <ScalarProperty Name="slideImagen" ColumnName="slideImagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="miembro">
+      <EntityTypeMapping TypeName="zarbittiDBModel.miembro">
+        <MappingFragment StoreEntitySet="miembro">
+          <ScalarProperty Name="IDMiembro" ColumnName="IDMiembro" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="apellido" ColumnName="apellido" />
+          <ScalarProperty Name="correoId" ColumnName="correoId" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+          <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+          <ScalarProperty Name="fechaModificacion" ColumnName="fechaModificacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rol">
+      <EntityTypeMapping TypeName="zarbittiDBModel.rol">
+        <MappingFragment StoreEntitySet="rol">
+          <ScalarProperty Name="IDRol" ColumnName="IDRol" />
+          <ScalarProperty Name="nombreRol" ColumnName="nombreRol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rolMiembro">
+      <EntityTypeMapping TypeName="zarbittiDBModel.rolMiembro">
+        <MappingFragment StoreEntitySet="rolMiembro">
+          <ScalarProperty Name="IDRolMiembro" ColumnName="IDRolMiembro" />
+          <ScalarProperty Name="IDMiembro" ColumnName="IDMiembro" />
+          <ScalarProperty Name="IDRol" ColumnName="IDRol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="producto">
+      <EntityTypeMapping TypeName="zarbittiDBModel.producto">
+        <MappingFragment StoreEntitySet="producto">
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+          <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="fechaDeModificacion" ColumnName="fechaDeModificacion" />
+          <ScalarProperty Name="fechaDeCreacion" ColumnName="fechaDeCreacion" />
+          <ScalarProperty Name="eliminado" ColumnName="eliminado" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+          <ScalarProperty Name="nombreProducto" ColumnName="nombreProducto" />
+          <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
