@@ -16,7 +16,6 @@ namespace ZarbiTtiTFA.Models.Moderna
             return new ModernaIndexViewModel()
             {
                 listaDeProductos = _unitOfWork.GetRepositoryInstance<producto>().GetAllRecords()
-
             };
         }
     }

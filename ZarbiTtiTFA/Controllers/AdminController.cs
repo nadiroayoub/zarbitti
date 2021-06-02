@@ -43,7 +43,6 @@ namespace ZarbiTtiTFA.Controllers
         }
         public ActionResult AnyadirCategoria()
         {
-
             return UpdateCategoria(0);
         }
         public ActionResult UpdateCategoria(int categoriaID)

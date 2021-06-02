@@ -11,7 +11,7 @@ namespace ZarbiTtiTFA.Models
     {
         public int IDCategoria { get; set; }
         [Required(ErrorMessage = "nombre de categoria es obligatorio")]
-        [StringLength(100, ErrorMessage = "caracteris entre 3 y 100", MinimumLength = 3)]
+        [StringLength(100, ErrorMessage = "caracteres entre 3 y 100", MinimumLength = 3)]
         public string nombreCategoria { get; set; }
         public Nullable<bool> active { get; set; }
         public Nullable<bool> eliminado { get; set; }

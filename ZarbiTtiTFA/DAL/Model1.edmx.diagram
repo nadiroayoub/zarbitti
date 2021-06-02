@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="zarbittiDBModel.estadoCarrito" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="zarbittiDBModel.imagenSlide" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="zarbittiDBModel.miembro" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="zarbittiDBModel.rol" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="zarbittiDBModel.rol" Width="1.5" PointX="7.625" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="zarbittiDBModel.rolMiembro" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
         <AssociationConnector Association="zarbittiDBModel.FK__detallesC__IDMie__3A81B327" ManuallyRouted="false" />
         <EntityTypeShape EntityType="zarbittiDBModel.producto" Width="1.5" PointX="3" PointY="0.875" />

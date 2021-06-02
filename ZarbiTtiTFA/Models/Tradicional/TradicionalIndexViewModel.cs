@@ -16,7 +16,6 @@ namespace ZarbiTtiTFA.Models.Tradicional
             return new TradicionalIndexViewModel()
             {
                 listaDeProductos = _unitOfWork.GetRepositoryInstance<producto>().GetAllRecords()
-
             };
         }
     }

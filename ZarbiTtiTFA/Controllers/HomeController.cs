@@ -15,7 +15,7 @@ namespace ZarbiTtiTFA.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Nuestro equipo se compose de 3 personas";
 
             return View();
         }
